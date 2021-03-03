@@ -102,7 +102,7 @@ stock_data.describe()
 
 
 <div>
-<style scoped>
+<style >
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -193,7 +193,7 @@ benchmark_data.describe()
 
 
 <div>
-<style scoped>
+<style >
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -277,7 +277,7 @@ stock_returns.describe()
 
 
 <div>
-<style scoped>
+<style >
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -406,7 +406,7 @@ excess_returns.describe()
 
 
 <div>
-<style scoped>
+<style >
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
