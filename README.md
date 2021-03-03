@@ -1,7 +1,7 @@
 
 ## 1. Meet Professor William Sharpe
 <p>An investment may make sense if we expect it to return more money than it costs. But returns are only part of the story because they are risky - there may be a range of possible outcomes. How does one compare different investments that may deliver similar results on average, but exhibit different levels of risks?</p>
-<p><img style="float: left ; margin: 5px 20px 5px 1px;" width="200" src="https://assets.datacamp.com/production/project_66/img/sharpe.jpeg"></p>
+<p><img style="float: left ; margin: 5px 20px 5px 1px;" width="200" src="/img/project_image.png"></p>
 <p>Enter William Sharpe. He introduced the <a href="https://web.stanford.edu/~wfsharpe/art/sr/sr.htm"><em>reward-to-variability ratio</em></a> in 1966 that soon came to be called the Sharpe Ratio. It compares the expected returns for two investment opportunities and calculates the additional return per unit of risk an investor could obtain by choosing one over the other. In particular, it looks at the difference in returns for two investments and compares the average difference to the standard deviation (as a measure of risk) of this difference. A higher Sharpe ratio means that the reward will be higher for a given amount of risk. It is common to compare a specific opportunity against a benchmark that represents an entire category of investments.</p>
 <p>The Sharpe ratio has been one of the most popular risk/return measures in finance, not least because it's so simple to use. It also helped that Professor Sharpe won a Nobel Memorial Prize in Economics in 1990 for his work on the capital asset pricing model (CAPM).</p>
 <p>The Sharpe ratio is usually calculated for a portfolio and uses the risk-free interest rate as benchmark. We will simplify our example and use stocks instead of a portfolio. We will also use a stock index as benchmark rather than the risk-free interest rate because both are readily available at daily frequencies and we do not have to get into converting interest rates from annual to daily frequency. Just keep in mind that you would run the same calculation with portfolio returns and your risk-free rate of choice, e.g, the <a href="https://fred.stlouisfed.org/series/TB3MS">3-month Treasury Bill Rate</a>. </p>
@@ -29,8 +29,6 @@ print('\nBenchmarks\n')
 print(benchmark_data.head())
 ```
 
-    DEBUG:matplotlib.pyplot:Loaded backend module://ipykernel.pylab.backend_inline version unknown.
-
 
     Stocks
     
@@ -51,45 +49,6 @@ print(benchmark_data.head())
     2016-01-06  1990.26
     2016-01-07  1943.09
     2016-01-08  1922.03
-
-
-
-```python
-%%nose
-
-def test_benchmark_data():
-    assert isinstance(benchmark_data, pd.core.frame.DataFrame), \
-        'Did you import the benchmark_data as a DataFrame?'
-
-def test_stock_data():
-    assert isinstance(stock_data, pd.core.frame.DataFrame), \
-        'Did you import the stock_data as a DataFrame?'
-
-def test_benchmark_index():
-    assert isinstance(benchmark_data.index, pd.core.indexes.datetimes.DatetimeIndex), \
-        "Did you set the 'Date' column as Index for the benchmark_data?"
-
-def test_stock_index():
-    assert isinstance(stock_data.index, pd.core.indexes.datetimes.DatetimeIndex), \
-        "Did you set the 'Date' column as Index for the stock_data?"
-
-def test_stock_data_shape():
-    assert stock_data.shape == (252, 2), \
-        "Did you use .dropna() on the stock_data?"
-
-def test_stock_benchmark_shape():
-    assert benchmark_data.shape == (252, 1), \
-        "Did you use .dropna() on the benchmark_data?"
-    
-```
-
-
-
-
-
-
-    6/6 tests passed
-
 
 
 
@@ -128,23 +87,6 @@ benchmark_data.info()
 
 
 
-```python
-%%nose
-
-def test_nothing():
-    pass
-```
-
-
-
-
-
-
-    1/1 tests passed
-
-
-
-
 ## 3. Plot & summarize daily prices for Amazon and Facebook
 <p>Before we compare an investment in either Facebook or Amazon with the index of the 500 largest companies in the US, let's visualize the data, so we better understand what we're dealing with.</p>
 
@@ -157,8 +99,6 @@ plt.title("Stock Data")
 # summarize the stock_data
 stock_data.describe()
 ```
-
-
 
 
 <div>
@@ -232,22 +172,6 @@ stock_data.describe()
 
 
 ![png](output_7_1.png)
-
-
-
-```python
-%%nose
-
-def test_nothing():
-    pass
-```
-
-
-
-
-
-
-    1/1 tests passed
 
 
 
@@ -330,23 +254,6 @@ benchmark_data.describe()
 
 
 ![png](output_10_1.png)
-
-
-
-```python
-%%nose
-
-def test_nothing():
-    pass
-```
-
-
-
-
-
-
-    1/1 tests passed
-
 
 
 
@@ -443,24 +350,6 @@ stock_returns.describe()
 
 
 
-```python
-%%nose
-
-def test_stock_returns():
-    assert stock_returns.equals(stock_data.pct_change()), \
-    'Did you use pct_change()?'
-```
-
-
-
-
-
-
-    1/1 tests passed
-
-
-
-
 ## 6. Daily S&P 500 returns
 <p>For the S&amp;P 500, calculating daily returns works just the same way, we just need to make sure we select it as a <code>Series</code> using single brackets <code>[]</code> and not as a <code>DataFrame</code> to facilitate the calculations in the next step.</p>
 
@@ -494,22 +383,6 @@ sp_returns.describe()
 
 ![png](output_16_1.png)
 
-
-
-```python
-%%nose
-
-def test_sp_returns():
-    assert sp_returns.equals(benchmark_data['S&P 500'].pct_change()), \
-    'Did you use pct_change()?'
-```
-
-
-
-
-
-
-    1/1 tests passed
 
 
 
@@ -606,21 +479,6 @@ excess_returns.describe()
 
 
 
-```python
-%%nose
-
-def test_excess_returns():
-    assert excess_returns.equals(stock_returns.sub(sp_returns, axis=0)), \
-    'Did you use .sub()?'
-```
-
-
-
-
-
-
-    1/1 tests passed
-
 
 
 
@@ -642,23 +500,6 @@ plt.title("Mean of the Return Difference");
 
 
 
-```python
-%%nose
-
-def test_avg_excess_return():
-    assert avg_excess_return.equals(excess_returns.mean()), \
-    'Did you use .mean()?'
-```
-
-
-
-
-
-
-    1/1 tests passed
-
-
-
 
 ## 9. The Sharpe Ratio, Step 2: Standard Deviation of the Return Difference
 <p>It looks like there was quite a bit of a difference between average daily returns for Amazon and Facebook.</p>
@@ -676,23 +517,6 @@ plt.title("Standard Deviation of the Return Difference");
 
 
 ![png](output_25_0.png)
-
-
-
-```python
-%%nose
-
-def test_sd_excess():
-    assert sd_excess_return.equals(excess_returns.std()), \
-    'Did you use .std() on excess_returns?'
-```
-
-
-
-
-
-
-    1/1 tests passed
 
 
 
@@ -720,29 +544,6 @@ plt.title("Annualized Sharpe Ratio: Stocks vs S&P 500");
 
 
 
-```python
-%%nose
-
-def test_daily_sharpe():
-    assert daily_sharpe_ratio.equals(avg_excess_return.div(sd_excess_return)), \
-    'Did you use .div() avg_excess_return and sd_excess_return?'
-    
-def test_annual_factor():
-    assert annual_factor == np.sqrt(252), 'Did you apply np.sqrt() to, number_of_trading_days?'
-    
-def test_annual_sharpe():
-    assert annual_sharpe_ratio.equals(daily_sharpe_ratio.mul(annual_factor)), 'Did you use .mul() with daily_sharpe_ratio and annual_factor?'
-```
-
-
-
-
-
-
-    3/3 tests passed
-
-
-
 
 ## 11. Conclusion
 <p>Given the two Sharpe ratios, which investment should we go for? In 2016, Amazon had a Sharpe ratio twice as high as Facebook. This means that an investment in Amazon returned twice as much compared to the S&amp;P 500 for each unit of risk an investor would have assumed. In other words, in risk-adjusted terms, the investment in Amazon would have been more attractive.</p>
@@ -755,22 +556,4 @@ def test_annual_sharpe():
 buy_amazon = True
 # buy_facebook = True
 ```
-
-
-```python
-%%nose
-
-def test_decision():
-    assert 'buy_amazon' in globals() and buy_amazon == True, \
-    'Which stock has the higher Sharpe Ratio'
-```
-
-
-
-
-
-
-    1/1 tests passed
-
-
 
